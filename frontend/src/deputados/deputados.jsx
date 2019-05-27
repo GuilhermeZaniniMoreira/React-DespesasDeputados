@@ -5,8 +5,6 @@ import PageHeader from '../template/pageheader'
 import DeputadoForm from './deputadoForm'
 import ListaDeputados from './listaDeputados'
 
-import Tabela from '../template/table'
-
 const URL = 'https://dadosabertos.camara.leg.br/api/v2/deputados?nome='
 
 export default class Deputado extends Component {
