@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "webpack-dev-server --progress --colors --inline --hot",
     "production": "webpack --progress -p",
-    "deploy:prod": "rsync -avzhe ssh --progress ./public/* root@deputados:/root/deputados"
+    "deploy:prod": "rsync -avzhe ssh --progress ./public/* root@deputados:/root/deputados/React-DespesasDeputados/frontend"
   },
   "keywords": [],
   "author": "",
