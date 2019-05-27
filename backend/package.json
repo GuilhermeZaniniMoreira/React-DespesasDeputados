@@ -1,0 +1,14 @@
+{
+  "name": "backend-deputados-despesas",
+  "version": "1.0.0",
+  "description": "backend para despesas dos deputados",
+  "main": "src/index.js",
+  "scripts": {},
+  "author": "Guilherme Zanini Moreira",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.0"
+  }
+}
