@@ -6,7 +6,7 @@ export default props => {
     const renderRows = () => {
         const list = props.list || []
         return list.map(despesa => (
-            <tr key={despesa.codLote}>
+            <tr key={despesa.codDocumento}>
                 <td>{despesa.tipoDespesa}</td>
                 <td>{despesa.dataDocumento}</td>
                 <td>{despesa.nomeFornecedor}</td>

@@ -40,7 +40,7 @@ class Deputado extends React.Component {
         var month = (d.getMonth()) + 1
         var year = (d.getFullYear())
 
-        this.state = { list: [], nomeDeputado : "", year : year, month : month, loading : 0 }
+        this.state = { list: [], nomeDeputado : "", partido : "", estado : "", year : year, month : month, loading : 0 }
         this.handleChangeYear = this.handleChangeYear.bind(this);
         this.handleChangeMonth = this.handleChangeMonth.bind(this);
     }
@@ -67,9 +67,21 @@ class Deputado extends React.Component {
         }
         
         this.setState({...this.setState, loading : 1})
-        axios.get(`${URL}/${idDeputado}/${month}/${year}`)
-        .then(resp => this.setState({...this.setState, list: resp.data, year : year, month : month, loading : 0}))
-        }
+
+        axios.all([
+            axios.get(`${URL}/${idDeputado}/${month}/${year}`),
+            axios.get(`${URLDadosDeputado}/${idDeputado}`)
+          ])
+          .then(axios.spread((despesas, dadosDeputado) => {
+                console.log(despesas.data)
+                var nomeDeputado = dadosDeputado.data.ultimoStatus.nomeEleitoral
+                var partido = dadosDeputado.data.ultimoStatus.siglaPartido
+                var uf = dadosDeputado.data.ultimoStatus.siglaUf
+                this.setState({...this.setState, partido : partido, estado : uf, nomeDeputado : nomeDeputado, list: despesas.data, year : year, month : month, loading : 0})
+                console.log(this.state)
+          }));
+
+    }
 
     handleChangeYear(selectedOption) {
         this.refresh(parseInt(selectedOption.label))
@@ -104,7 +116,7 @@ class Deputado extends React.Component {
                             />
                         </li>
                     </ul>
-                <PageHeader name="Despesas" small={this.state.month} year={this.state.year}></PageHeader>
+                <PageHeader nomeDeputado={this.state.nomeDeputado} partido={this.state.partido} uf={this.state.estado} name="Despesas" small={this.state.month} year={this.state.year}></PageHeader>
                 <ListaDespesas
                     list={this.state.list} />
             </div>
