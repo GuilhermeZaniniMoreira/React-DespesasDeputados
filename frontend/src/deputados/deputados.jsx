@@ -13,9 +13,9 @@ export default class Deputado extends Component {
         super(props)
         this.state = { nomeDeputado: '', list: [], loading: 0}
     
+        this.handleChange = this.handleChange.bind(this)
         this.handleSearch = this.handleSearch.bind(this)
         this.handleClear = this.handleClear.bind(this)
-        this.handleChange = this.handleChange.bind(this)
 
         this.handleDespesas = this.handleDespesas.bind(this)
     }
@@ -30,7 +30,6 @@ export default class Deputado extends Component {
             this.setState({...this.state, loading : 1})
             axios.get(`${URL}${search}&itens=550&ordem=ASC&ordenarPor=nome`)
             .then(resp => this.setState({...this.setState, list: resp.data.dados, loading : 0}))
-    
     }
 
     handleSearch() {
@@ -38,7 +37,12 @@ export default class Deputado extends Component {
     }
 
     handleChange(e) {
+        console.log(e)
         this.setState({...this.state, nomeDeputado: e.target.value })
+    }
+
+    handleSearch() {
+        this.refresh(this.state.nomeDeputado)
     }
 
     handleClear() {
@@ -57,7 +61,7 @@ export default class Deputado extends Component {
                     <PageHeader name='Buscar deputado'></PageHeader>
                     <DeputadoForm
                         nomeDeputado={this.state.nomeDeputado}
-                        handleChange={this.state.handleChange}
+                        handleChange={this.handleChange}
                         handleSearch={this.handleSearch}
                         handleClear={this.handleClear} />
                     <ListaDeputados

@@ -73,7 +73,6 @@ class Deputado extends React.Component {
             axios.get(`${URLDadosDeputado}/${idDeputado}`)
           ])
           .then(axios.spread((despesas, dadosDeputado) => {
-                console.log(despesas.data)
                 var nomeDeputado = dadosDeputado.data.ultimoStatus.nomeEleitoral
                 var partido = dadosDeputado.data.ultimoStatus.siglaPartido
                 var uf = dadosDeputado.data.ultimoStatus.siglaUf
